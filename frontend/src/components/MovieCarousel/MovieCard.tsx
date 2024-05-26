@@ -6,7 +6,7 @@ import "./MovieCard.css";
 
 const MovieCard = (data: MovieCardType) => {
   const router = useRouter();
-  const city = "HoChiMinh"
+  const city = "mumbai"
   const { title, imageUrl, rating, type } = data;
 
   return (

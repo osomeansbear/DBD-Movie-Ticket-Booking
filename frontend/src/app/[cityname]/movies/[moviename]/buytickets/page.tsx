@@ -11,7 +11,7 @@ const page = () => {
 
   const movie = {
       moviename: 'Jawan',
-      screen: '4Dx',
+      // screen: '4Dx',
       date: new Date(),
       language: 'Hindi',
       type: 'Action/Thriller',
@@ -31,7 +31,7 @@ const page = () => {
       ]
   }
 
-  const selectedDay = (val:any) => {
+  const selectedDay = (val: any) => {
     console.log(val)
   };
 
@@ -59,6 +59,7 @@ const page = () => {
                   <h2>{screen.name}</h2>
                   <p>{screen.location}</p>
                 </div>
+  
                 <Link href={`${pathname}/${screen.name}`} className='theme_btn1 linkstylenone'>Select</Link>
               </div>
             )

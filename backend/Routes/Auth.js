@@ -18,8 +18,12 @@ function createRespond(ok, message, data) {
 }
 
 router.post("/register", async (req, res, next) => {});
+
+router.post("/sendotp", async (req, res) => {});
 router.post("/login", async (req, res, next) => {});
 
 router.post("/checklogin", authTokenHandler, async (req, res, next) => {});
+
+router.use(errorHandler);
 
 module.exports = router;

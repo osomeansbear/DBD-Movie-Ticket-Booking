@@ -10,8 +10,11 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import CelebCard from '@/components/CelebCard/CelebCard'
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const MoviePage = () => {
+  const pathname = usePathname()
   
   const movie = {
     wideposter: "https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/jawan-et00330424-1693892482.jpg",
@@ -162,7 +165,12 @@ const MoviePage = () => {
                                 {movie.releasedate}
                             </span>
                         </p>
-                        <button className="bookbtn">Book Tickets</button>
+                        <Link
+                          href={`${pathname}/buytickets`}
+                          className='linkstylenone'
+                        >
+                          <button className="bookbtn">Book Tickets</button>
+                        </Link>
                     </div>            
                 </div>
 

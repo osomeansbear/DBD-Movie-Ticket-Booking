@@ -53,3 +53,12 @@
   border-bottom: none;
 }
 
+.buytickets .screens .screen h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.buytickets .screens .screen h3 {
+  font-size: 15px;
+  font-weight: 600;
+}

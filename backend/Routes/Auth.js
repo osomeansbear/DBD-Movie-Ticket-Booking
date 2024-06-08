@@ -17,12 +17,33 @@ function createRespond(ok, message, data) {
   return { ok, message, data };
 }
 
-router.post("/register", async (req, res, next) => {});
+router.post("/register", async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    const existingUser = await User.findOne({ email: email });
 
-router.post("/sendotp", async (req, res) => {});
+    if (existingUser) {
+      return res.status(409).json(createRespond(false, "Email already exists"));
+    }
+    //   const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      name,
+      email,
+      password,
+    });
+
+    await newUser.save();
+    res.status(201).json(createRespond(true, "User registered successfully"));
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/login", async (req, res, next) => {});
 
-router.post("/checklogin", authTokenHandler, async (req, res, next) => {});
+router.post("/sendotp", async (req, res) => {});
+
+router.post("/checklogin", authTokenHandler, async (req, res) => {});
 
 router.use(errorHandler);
 

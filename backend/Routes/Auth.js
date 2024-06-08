@@ -39,11 +39,46 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-router.post("/login", async (req, res, next) => {});
+router.post("/login", async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json(createRespond(false, "Invalid credentials"));
+  }
 
-router.post("/sendotp", async (req, res) => {});
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).json(createRespond(false, "Invalid credentials"));
+  }
 
-router.post("/checklogin", authTokenHandler, async (req, res) => {});
+  const authToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+    expiresIn: "10m",
+  });
+
+  const refreshToken = jwt.sign(
+    { userId: user._id },
+    process.env.JWT_REFRESH_SECRET_KEY,
+    { expiresIn: "1d" }
+  );
+
+  res.cookie("authToken", authToken, {
+    httpOnly: true,
+  });
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+  });
+
+  res.status(200).json(
+    createResponse(true, "Login successful", {
+      authToken,
+      refreshToken,
+    })
+  );
+});
+// router.post("/sendotp", async (req, res) => {});
+
+// router.post("/checklogin", authTokenHandler, async (req, res) => {});
 
 router.use(errorHandler);
 

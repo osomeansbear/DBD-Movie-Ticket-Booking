@@ -13,7 +13,7 @@ router.get("/test", async (req, res) => {
   });
 });
 
-function createRespond(ok, message, data) {
+function createResponse(ok, message, data) {
   return { ok, message, data };
 }
 
@@ -58,7 +58,7 @@ router.post("/login", async (req, res, next) => {
   const refreshToken = jwt.sign(
     { userId: user._id },
     process.env.JWT_REFRESH_SECRET_KEY,
-    { expiresIn: "1d" }
+    { expiresIn: "30m" }
   );
 
   res.cookie("authToken", authToken, {

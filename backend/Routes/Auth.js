@@ -23,7 +23,9 @@ router.post("/register", async (req, res, next) => {
     const existingUser = await User.findOne({ email: email });
 
     if (existingUser) {
-      return res.status(409).json(createRespond(false, "Email already exists"));
+      return res
+        .status(409)
+        .json(createResponse(false, "Email already exists"));
     }
     //   const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
@@ -33,7 +35,7 @@ router.post("/register", async (req, res, next) => {
     });
 
     await newUser.save();
-    res.status(201).json(createRespond(true, "User registered successfully"));
+    res.status(201).json(createResponse(true, "User registered successfully"));
   } catch (err) {
     next(err);
   }
@@ -43,12 +45,12 @@ router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).json(createRespond(false, "Invalid credentials"));
+    return res.status(400).json(createResponse(false, "Invalid credentials"));
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).json(createRespond(false, "Invalid credentials"));
+    return res.status(400).json(createResponse(false, "Invalid credentials"));
   }
 
   const authToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {

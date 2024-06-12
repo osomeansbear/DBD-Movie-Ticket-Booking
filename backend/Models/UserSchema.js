@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    booking: {
+    bookings: {
       type: Array,
       default: [],
     },

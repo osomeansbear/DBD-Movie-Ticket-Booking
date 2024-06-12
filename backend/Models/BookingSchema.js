@@ -14,23 +14,39 @@ const bookingSchema = new mongoose.Schema({
     ref: "Movie", // Reference to the Movie model
     required: true,
   },
-  theaterId: {
+  screenId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Screen", // Reference to the Screen model
     required: true,
   },
   seats: [
     {
-      seat_id: {
+      seatId: {
         type: String,
         required: true,
       },
       type: String,
       status: String,
+      seatRow: String,
+      seatCol: String,
+      seatRowName: String,
     },
   ],
   totalPrice: {
     type: Number,
+    required: true,
+  },
+  paymentId: {
+    type: String,
+    required: true,
+  },
+  paymentType: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Reference to the User model
     required: true,
   },
 });

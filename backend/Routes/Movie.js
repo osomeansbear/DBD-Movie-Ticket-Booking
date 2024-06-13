@@ -257,23 +257,19 @@ router.get("/movies/:id", async (req, res, next) => {
   }
 });
 
-router.get("/screensbycity", async (req, res, next) => {
-  try {
-    const city = req.body.city;
-    const screens = await Screen.find({ city });
-    if (!screens || screens.length === 0) {
-      return res
-        .status(404)
-        .json(
-          createResponse(false, "No screens found in the specified city", null)
-        );
-    }
+router.get('/screensbycity/:city', async (req, res, next) => {
+  const city = req.params.city.toLowerCase();
 
-    res
-      .status(200)
-      .json(createResponse(true, "Screens retrieved successfully", screens));
-  } catch (err) {
-    next(err);
+  try {
+      const screens = await Screen.find({ city });
+      if (!screens || screens.length === 0) {
+          return res.status(404).json(createResponse(false, 'No screens found in the specified city', null));
+      }
+
+      res.status(200).json(createResponse(true, 'Screens retrieved successfully', screens));
+  }
+  catch (err) {
+      next(err); // Pass any errors to the error handling middleware
   }
 });
 

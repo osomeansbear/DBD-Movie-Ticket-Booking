@@ -15,103 +15,32 @@ import Link from "next/link";
 
 const MoviePage = () => {
   const pathname = usePathname();
+  const { movieid } = useParams();
+  const [movie, setMovie] = React.useState<any>(null);
 
-  const movie = {
-    wideposter:
-      "https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/jawan-et00330424-1693892482.jpg",
-    portraitposter:
-      "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/jawan-et00330424-1693892482.jpg",
-    title: "Jawan",
-    rating: 8.5,
-    halls: ["2D", "3D"],
-    languages: ["Telugu", "Hindi", "English"],
-    duration: "2h 15m",
-    type: "Action/Thriller",
-    releasedate: "Sep 3, 2023",
-    cast: [
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
+  const getMovies = async () => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/movie/movies/${movieid}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-      {
-        _id: "1",
-        name: "Shah Rukh Khan",
-        role: "Actor",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/shah-rukh-khan-2092-12-09-2017-02-10-43.jpg",
-      },
-    ],
-    crew: [
-      {
-        _id: "1",
-        name: "Atlee",
-        role: "Director",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/atlee-37797-1689670023.jpg",
-      },
-      {
-        _id: "1",
-        name: "Atlee",
-        role: "Director",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/atlee-37797-1689670023.jpg",
-      },
-      {
-        _id: "1",
-        name: "Atlee",
-        role: "Director",
-        imageUrl:
-          "https://in.bmscdn.com/iedb/artist/images/website/poster/large/atlee-37797-1689670023.jpg",
-      },
-    ],
-    about:
-      "A high-octane action thriller that outlines the emotional journey of a man who is set to rectify the wrongs in society.",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.ok) {
+          console.log(data);
+          setMovie(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  React.useEffect(() => {
+    getMovies();
+  });
 
   return (
     <div className="moviepage">

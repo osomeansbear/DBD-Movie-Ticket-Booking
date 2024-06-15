@@ -29,7 +29,13 @@ const screenSchema = new mongoose.Schema({
         required: true,
       },
       showTime: String,
-      notAvailableSeats: [String],
+      notAvailableSeats: [{
+        row: String,
+        col: Number,
+        seat_id: String,
+        price: Number,
+
+      }],
       showDate: Date,
     },
   ],

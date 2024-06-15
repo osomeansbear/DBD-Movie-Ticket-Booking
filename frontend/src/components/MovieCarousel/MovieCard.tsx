@@ -7,9 +7,9 @@ import "./MovieCard.css";
 const MovieCard = (data: any) => {
   const router = useRouter();
   // const { city } = data.user;
-  const city = "hochiminh";
-  // console.log(city);
-  const { _id, title, genre, rating, potraitImgUrl } = data.Movie;
+  const city = "Ho Chi Minh";
+  console.log(data);
+  const { _id, title, genre, rating, portraitImgUrl } = data.Movie;
 
   return (
     <div
@@ -21,7 +21,7 @@ const MovieCard = (data: any) => {
       <div
         className="movieimg"
         style={{
-          backgroundImage: `url(${potraitImgUrl})`,
+          backgroundImage: `url(${portraitImgUrl})`,
         }}
       >
         <p className="rating">

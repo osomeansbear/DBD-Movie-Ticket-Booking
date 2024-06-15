@@ -10,7 +10,7 @@ const LocationPopup = ({
 }) => {
   const [cities, setCities] = React.useState<any[]>([]);
   const getcities = async () => {
-    const VNCities = ["Hà Nội", "Hồ Chí Minh", "Đà Nẵng"];
+    const VNCities = ["Ha Noi", "Ho Chi Minh", "Da Nang"];
 
     const cities = VNCities.map((city) => {
       return {

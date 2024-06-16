@@ -109,7 +109,7 @@ const SelectSeatPage = () => {
         {screen.screen.seats.map((seatType, index) => (
           <div className="seat-type" key={index}>
             <h2>
-              {seatType.type} - VND. {seatType.price}
+              {seatType.type} - Rs. {seatType.price}
             </h2>
             <div className="seat-rows">
               {seatType.rows.map((row, rowIndex) => (
@@ -278,7 +278,7 @@ const SelectSeatPage = () => {
             <div className="total">
               <h2>Total</h2>
               <h3>
-                VND. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}
+                Rs. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}
               </h3>
             </div>
 

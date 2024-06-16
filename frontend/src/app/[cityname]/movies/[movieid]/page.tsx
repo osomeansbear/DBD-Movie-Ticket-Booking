@@ -3,7 +3,7 @@ import React from "react";
 import { BsShare } from "react-icons/bs";
 import { BsFillStarFill } from "react-icons/bs";
 import "./MoviePage.css";
-import MovieCarousel from "@/components/MovieCarousel/MovieCarousel";
+import MovieCarousel from "@/components/moviecarousel/MovieCarousel";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -71,7 +71,7 @@ const MoviePage = () => {
                     &nbsp;&nbsp;
                     {movie.rating}/10
                   </p>
-                    <p className="duration_type_releasedat">
+                  <p className="duration_type_releasedat">
                     <span className="duration">{movie.duration}</span>
                     <span>•</span>
                     <span className="type">{movie.genre.join(", ")}</span>

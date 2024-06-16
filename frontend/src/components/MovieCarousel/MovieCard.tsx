@@ -6,10 +6,10 @@ import "./MovieCard.css";
 
 const MovieCard = (data: any) => {
   const router = useRouter();
-  // const { city } = data.user;
-  const city = "Ho Chi Minh";
-  console.log(data);
   const { _id, title, genre, rating, portraitImgUrl } = data.Movie;
+  const { city } = data.user;
+  console.log(city);
+  // const city = 'mumbai'
 
   return (
     <div
@@ -25,10 +25,11 @@ const MovieCard = (data: any) => {
         }}
       >
         <p className="rating">
-          <BsFillStarFill className="star" /> &nbsp;&nbsp;{rating}/10
+          <BsFillStarFill className="star" />
+          &nbsp;&nbsp;
+          {rating}/10
         </p>
       </div>
-
       <div className="details">
         <p className="title">{title}</p>
         <p className="type">{genre.join(", ")}</p>

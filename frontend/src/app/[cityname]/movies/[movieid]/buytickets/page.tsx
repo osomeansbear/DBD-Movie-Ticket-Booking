@@ -31,7 +31,6 @@ const BuyTicketsPage = () => {
       .catch((err) => {
         console.log(err);
       });
-
   };
 
   const getTheatres = async (date: string) => {
@@ -58,9 +57,10 @@ const BuyTicketsPage = () => {
         }
       });
 
-      console.log(`${process.env.NEXT_PUBLIC_BACKEND_API}/movie/screensbymovieschedule/${city}/${date}/${movieId}`);
+    console.log(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/movie/screensbymovieschedule/${city}/${date}/${movieId}`
+    );
   };
-
 
   React.useEffect(() => {
     getMovie();

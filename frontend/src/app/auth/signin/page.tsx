@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Navbar from "@/components/Navbar/NavBar";
+import Navbar from "@/components/Navbar/Navbar";
 import "../auth.css";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -45,8 +45,7 @@ const Signin = () => {
       setError(validationErrors);
       return;
     }
-   
-    
+
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/auth/login`, {
       method: "POST",
       headers: {

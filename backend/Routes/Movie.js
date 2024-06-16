@@ -109,7 +109,10 @@ router.post("/createscreen", adminTokenHandler, async (req, res, next) => {
     next(err); // Pass any errors to the error handling middleware
   }
 });
-router.post("/addmoviescheduletoscreen", adminTokenHandler, async (req, res, next) => {
+router.post(
+  "/addmoviescheduletoscreen",
+  adminTokenHandler,
+  async (req, res, next) => {
     console.log("Inside addmoviescheduletoscreen");
     try {
       const { screenId, movieId, showTime, showDate } = req.body;
@@ -204,7 +207,7 @@ router.post("/bookticket", authTokenHandler, async (req, res, next) => {
         message: "User not found",
       });
     }
-    console.log("before newBooking done");
+
     const newBooking = new Booking({
       userId: req.userId,
       showTime,
@@ -217,15 +220,13 @@ router.post("/bookticket", authTokenHandler, async (req, res, next) => {
       paymentType,
     });
     await newBooking.save();
-    console.log("newBooking done");
 
     movieSchedule.notAvailableSeats.push(...seats);
     await screen.save();
-    console.log("screen saved");
 
     user.bookings.push(newBooking._id);
     await user.save();
-    console.log("user saved");
+
     res.status(201).json({
       ok: true,
       message: "Booking successful",
@@ -290,7 +291,9 @@ router.get("/screensbycity/:city", async (req, res, next) => {
     next(err); // Pass any errors to the error handling middleware
   }
 });
-router.get("/screensbymovieschedule/:city/:date/:movieid", async (req, res, next) => {
+router.get(
+  "/screensbymovieschedule/:city/:date/:movieid",
+  async (req, res, next) => {
     try {
       const city = req.params.city.toLowerCase();
       const date = req.params.date;
@@ -319,7 +322,7 @@ router.get("/screensbymovieschedule/:city/:date/:movieid", async (req, res, next
         screen.movieSchedules.forEach((schedule) => {
           let showDate = new Date(schedule.showDate);
           let bodyDate = new Date(date);
-          console.log(showDate , bodyDate);
+          console.log(showDate, bodyDate);
           if (
             showDate.getDay() === bodyDate.getDay() &&
             showDate.getMonth() === bodyDate.getMonth() &&
@@ -342,7 +345,9 @@ router.get("/screensbymovieschedule/:city/:date/:movieid", async (req, res, next
   }
 );
 
-router.get("/schedulebymovie/:screenid/:date/:movieid", async (req, res, next) => {
+router.get(
+  "/schedulebymovie/:screenid/:date/:movieid",
+  async (req, res, next) => {
     const screenId = req.params.screenid;
     const date = req.params.date;
     const movieId = req.params.movieid;

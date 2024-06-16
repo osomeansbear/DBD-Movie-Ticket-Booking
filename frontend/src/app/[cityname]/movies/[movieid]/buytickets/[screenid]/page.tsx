@@ -12,12 +12,12 @@ const SelectSeatPage = () => {
 
   const date = searchParams.get("date");
   const { movieid, cityname, screenid } = params;
-  // console.log(movieid, cityname, screenid)
+  console.log(movieid, cityname, screenid);
 
   const [screen, setScreen] = React.useState<any>(null);
   const [selectedTime, setSelectedTime] = React.useState<any>(null);
 
-const getschedules = async () => {
+  const getschedules = async () => {
     fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/movie/schedulebymovie/${screenid}/${date}/${movieid}`,
       {
@@ -72,6 +72,12 @@ const getschedules = async () => {
 
   const selectdeselectseat = (seat: any) => {
     console.log(seat);
+    // {
+    //     "row": "F",
+    //     "col": 1,
+    //     "seat_id": "6",
+    //     "price": 500
+    // }
     const isselected = selectedSeats.find(
       (s: any) =>
         s.row === seat.row && s.col === seat.col && s.seat_id === seat.seat_id
@@ -150,6 +156,31 @@ const getschedules = async () => {
                               </span>
                             )}
                           </div>
+                          // <div key={seatIndex}>
+                          //     {seat.status === 'available' &&
+                          //         <span className={
+                          //             selectedSeats.find((s: any) => (
+                          //                 s.row === row.rowname &&
+                          //                 s.seat_id === seat.seat_id &&
+                          //                 s.col === colIndex
+                          //             )) ? "seat-selected" : "seat-available"
+                          //         }
+                          //         onClick={() => selectdeselectseat({
+                          //             row: row.rowname,
+                          //             col: colIndex,
+                          //             seat_id: seat.seat_id,
+                          //             price: seatType.price
+                          //         })}
+                          //     >
+                          //         {seatIndex + 1}
+                          //     </span>
+                          //     }
+                          //     {seat.status === 'not-available' &&
+                          //         <span className="seat-unavailable">
+                          //             {seatIndex + 1}
+                          //         </span>
+                          //     }
+                          // </div>
                         ))}
                       </div>
                     ))}
@@ -250,6 +281,7 @@ const getschedules = async () => {
               </h3>
             </div>
 
+            {/* <Link href="/" className='theme_btn1 linkstylenone'>Continue</Link> */}
             <button
               className="theme_btn1 linkstylenone"
               onClick={handleBooking}
@@ -259,6 +291,14 @@ const getschedules = async () => {
           </div>
         </div>
       )}
+      {/* 
+
+            <div className="selectseat">
+            
+               
+                
+              
+            </div> */}
     </div>
   );
 };
